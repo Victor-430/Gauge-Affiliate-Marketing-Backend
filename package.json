@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "resend": "^6.9.1"
+  },
+  "name": "gauge-affiliate-marketing-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "./server.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victor-430/Gauge-Affiliate-Marketing-Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Victor-430/Gauge-Affiliate-Marketing-Backend/issues"
+  },
+  "homepage": "https://github.com/Victor-430/Gauge-Affiliate-Marketing-Backend#readme"
+}
