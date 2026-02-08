@@ -3,15 +3,16 @@
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
-    "resend": "^6.9.1"
+    "firebase-admin": "^13.6.1",
+    "resend": "^6.9.1",
+    "uuid": "^13.0.0"
   },
   "name": "gauge-affiliate-marketing-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
-    "dev": "./server.js --watch",
+    "dev": "node --watch ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +22,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Victor-430/Gauge-Affiliate-Marketing-Backend/issues"
   },

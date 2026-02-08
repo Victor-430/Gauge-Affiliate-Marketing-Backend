@@ -1,6 +1,8 @@
 import { Router } from "express";
-import sendVerificationEmail from "../controller/email.js";
+import sendWelcomeEmail from "../controller/email.js";
 
 const router = Router()
 
-router.post("/send-verification",sendVerificationEmail() )
+router.post("/activate-associate",sendWelcomeEmail )
+
+export default router
