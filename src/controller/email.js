@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { auth, db } from "../../server";
+import { auth, db } from "../../server.js";
 import admin from "firebase-admin";
+import { resend } from "../config/resend.js";
 
 const sendWelcomeEmail = async (req, res, next) => {
   const generateUniqueCode = () => {
@@ -11,18 +12,20 @@ const sendWelcomeEmail = async (req, res, next) => {
 
   try {
     const { idToken } = req.body;
+    console.log(idToken)
 
     if (!idToken) {
       const error = new Error("ID token is required");
+      console.log("token required")
       error.status = 400;
       throw error;
     }
 
-    const decodedToken = await auth().verifyIdToken(idToken);
+    const decodedToken = await auth.verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
     // Check if email is verified
-    const userRecord = await auth().getUser(userId);
+    const userRecord = await auth.getUser(userId);
 
     if (!userRecord.emailVerified) {
       const error = new Error("Email not verified yet");
@@ -52,7 +55,8 @@ const sendWelcomeEmail = async (req, res, next) => {
 
     // Generate unique code and link
     const uniqueCode = generateUniqueCode();
-    const affiliateLink = `https://affiliate.gaugesolution.com/sales?ref=${uniqueCode}`;
+    const affiliateLink = `http://localhost:5173/sales?ref=${uniqueCode}`
+    // `https://affiliate.gaugesolution.com/sales?ref=${uniqueCode}`;
 
     // Update associate document
     await db.collection("associates").doc(userId).update({
@@ -65,7 +69,7 @@ const sendWelcomeEmail = async (req, res, next) => {
 
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
-      to: ["delivered@resend.dev", email],
+      to: ["victor@gaugesolution.com"],
       // from: "Gauge Solutions <noreply@gaugesolution.com>",
       // to: [associate.email],
       subject: "Welcome to Gauge Affiliate Program",
