@@ -68,7 +68,7 @@ const sendWelcomeEmail = async (req, res, next) => {
     });
 
     const { data, error } = await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
+      from: "Gauge <delivered@resend.dev>",
       to: ["victor@gaugesolution.com"],
       // from: "Gauge Solutions <noreply@gaugesolution.com>",
       // to: [associate.email],
@@ -84,22 +84,22 @@ const sendWelcomeEmail = async (req, res, next) => {
         <body class="bg-gray-50 font-sans">
           <div class="max-w-2xl mx-auto p-5">
             <div class="bg-black text-white p-8 text-center rounded-t-xl">
-              <h1 class="text-3xl font-bold m-0"> Account Activated!</h1>
+              <h1 class="text-3xl font-bold m-0"> Account Activated</h1>
               <p class="mt-2 mb-0 opacity-90">Welcome to Gauge Affiliate Program</p>
             </div>
             
             <div class="bg-gray-50 p-8 rounded-b-xl">
               <p class="mb-4">Hi <strong>${associate.fullName}</strong>,</p>
               
-              <p class="mb-6">Congratulations! Your email has been verified and your account is now <strong class="text-green-600">ACTIVE</strong>.</p>
+              <p class="mb-6">Congratulations. Your email has been verified and your account is now <strong class="text-green-600">ACTIVE</strong>.</p>
               
               <div class="bg-white border-2 border-dashed p-6 my-6 rounded-lg text-center">
-                <p class="text-sm text-gray-500 mb-3 uppercase tracking-wide">Your Unique Referral Code</p>
-                <div class="text-2xl font-bold text-white tracking-wider">${uniqueCode}</div>
+                <p class="text-sm text-gray-500 mb-3 uppercase tracking-wide">Your Unique Referral Code is:</p>
+                <span class="text-2xl font-bold text-white tracking-wider">${uniqueCode}</span>
               </div>
               
               <div class=" p-4 my-6 rounded-lg break-all">
-                <p class="mb-2 m-0"><strong>📎 Your Affiliate Link:</strong></p>
+                <p class="mb-2 m-0"><strong> Your Affiliate Link:</strong></p>
                 <a href="${affiliateLink}" class=" underline text-sm break-all">${affiliateLink}</a>
               </div>
       
