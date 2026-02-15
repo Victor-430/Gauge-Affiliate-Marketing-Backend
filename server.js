@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import emailRoutes from "./src/routes/email.js";
 import createAdminRoutes from "./src/routes/createAdmin.js"
 import getUserRoleRoutes from "./src/routes/getUserRole.js"
+import leadsRoutes from "./src/routes/leads.js"
 import admin from "firebase-admin";
 
 dotenv.config();
@@ -47,6 +48,7 @@ app.get("/health", async (req, res) => {
 app.use("/api", emailRoutes);
 app.use("/api", createAdminRoutes);
 app.use("/api", getUserRoleRoutes);
+app.use("/api", leadsRoutes)
 
 
 const Port = process.env.PORT || 3000;
