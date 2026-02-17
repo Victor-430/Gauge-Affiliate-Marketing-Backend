@@ -94,7 +94,7 @@ export const leads = async (req, res, next) => {
               <h1 class="text-3xl font-bold mb-4"> New Lead Submitted</h1>
 
               <p class="mb-4">Hi <strong>${associate.fullName}</strong>,</p>
-              <p class="mb-6">Great news. A new lead has been submitted using your referral code <strong>${referralCode}</strong>.</p>
+              <p class="mb-6">A new lead has been submitted using your referral code <strong>${referralCode}</strong>.</p>
               
               </div>
             
