@@ -55,7 +55,7 @@ const sendWelcomeEmail = async (req, res, next) => {
 
     // Generate unique code and link
     const uniqueCode = generateUniqueCode();
-    const affiliateLink = `http://localhost:5173/sales?ref=${uniqueCode}`
+    const affiliateLink = `http://localhost:5173/leads?ref=${uniqueCode}`
     // `https://affiliate.gaugesolution.com/sales?ref=${uniqueCode}`;
 
     // Update associate document
