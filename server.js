@@ -54,6 +54,6 @@ app.use("/api", leadsRoutes)
 const Port = process.env.PORT || 3000;
 
 app.listen(Port, () => {
-  console.log(process.env.RESEND_API_KEY);
+  // console.log(process.env.RESEND_API_KEY);
   console.log("Running on prot", { Port });
 });
