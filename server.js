@@ -2,20 +2,36 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import emailRoutes from "./src/routes/email.js";
-import createAdminRoutes from "./src/routes/createAdmin.js"
-import getUserRoleRoutes from "./src/routes/getUserRole.js"
-import leadsRoutes from "./src/routes/leads.js"
+import createAdminRoutes from "./src/routes/createAdmin.js";
+import getUserRoleRoutes from "./src/routes/getUserRole.js";
+import leadsRoutes from "./src/routes/leads.js";
 import admin from "firebase-admin";
 
 dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-  }),
-);
+const isProduction = process.env.NODE_ENV === "production";
+
+const allowedOrigins = isProduction
+  ? [process.env.CLIENT_URL]
+  : ["http://localhost:5173"]
+
+const corsOptions = {
+ 
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: origin "${origin}" not allowed`));
+      }
+    },
+  }
+
+
+app.use(cors(corsOptions));
+app.options("/{*path}", cors(corsOptions));
+
 
 // Body parser
 app.use(express.json());
@@ -34,26 +50,30 @@ export const auth = admin.auth();
 
 // health check and server report
 
-app.get("/health", async (req, res) => {
-  const health = {
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-    environment: process.env.NODE_ENV || "development",
-  };
+// app.get("/health", async (req, res) => {
+//   const health = {
+//     status: "ok",
+//     timestamp: new Date().toISOString(),
+//     uptime: process.uptime(),
+//     environment: process.env.NODE_ENV || "development",
+//   };
 
-  res.status(200).json(health);
-});
+//   res.status(200).json(health);
+// });
 
 app.use("/api", emailRoutes);
 app.use("/api", createAdminRoutes);
 app.use("/api", getUserRoleRoutes);
-app.use("/api", leadsRoutes)
-
+app.use("/api", leadsRoutes);
 
 const Port = process.env.PORT || 3000;
 
+if (process.env.NODE_ENV !== "production") {
 app.listen(Port, () => {
-  // console.log(process.env.RESEND_API_KEY);
-  console.log("Running on prot", { Port });
+  console.log("NODE_ENV:", process.env.NODE_ENV);
+  console.log("Running on port", Port);
 });
+}
+
+export default app;
+
