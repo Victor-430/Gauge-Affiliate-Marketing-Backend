@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "../../server.js";
 import admin from "firebase-admin";
 import { resend } from "../config/resend.js";
+import config from "../config/env.js"
 
 const sendWelcomeEmail = async (req, res, next) => {
   const generateUniqueCode = () => {
@@ -55,8 +56,7 @@ const sendWelcomeEmail = async (req, res, next) => {
 
     // Generate unique code and link
     const uniqueCode = generateUniqueCode();
-    const affiliateLink = `http://localhost:5173/leads?ref=${uniqueCode}`
-    // `https://affiliate.gaugesolution.com/sales?ref=${uniqueCode}`;
+    const affiliateLink = `${config.affiliateBaseUrl}/leads?ref=${uniqueCode}`
 
     // Update associate document
     await db.collection("associates").doc(userId).update({
