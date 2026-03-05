@@ -17,6 +17,11 @@ const allowedOrigins = isProduction
   ? [process.env.CLIENT_URL]
   : ["http://localhost:5173"]
 
+
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("CLIENT_URL:", process.env.CLIENT_URL);
+console.log("Allowed Origins:", allowedOrigins);
+
 const corsOptions = {
  
     origin: (origin, callback) => {
