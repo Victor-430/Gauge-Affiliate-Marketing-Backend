@@ -4,6 +4,6 @@ import { getUserRole } from "../controller/getUserRole.js"
 
 const router = Router()
 
-router.post("/auth/get-user-role",getUserRole)
+router.post("/get-role",getUserRole)
 
 export default router

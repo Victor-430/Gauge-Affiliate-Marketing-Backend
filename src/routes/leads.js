@@ -3,6 +3,6 @@ import { leads } from "../controller/leads.js";
 
 const router = Router()
 
-router.post("/leads/submit", leads)
+router.post("/submit", leads)
 
 export default router

@@ -4,6 +4,6 @@ import { createAdmin } from "../controller/createAdmin.js"
 
 const router = Router()
 
-router.post("/auth/create-admin",createAdmin)
+router.post("/create",createAdmin)
 
 export default router

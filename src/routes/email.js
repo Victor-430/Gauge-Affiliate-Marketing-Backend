@@ -3,6 +3,6 @@ import sendWelcomeEmail from "../controller/email.js";
 
 const router = Router()
 
-router.post("/activate-associate",sendWelcomeEmail )
+router.post("/activate",sendWelcomeEmail )
 
 export default router

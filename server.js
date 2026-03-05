@@ -61,10 +61,10 @@ export const auth = admin.auth();
 //   res.status(200).json(health);
 // });
 
-app.use("/api", emailRoutes);
-app.use("/api", createAdminRoutes);
-app.use("/api", getUserRoleRoutes);
-app.use("/api", leadsRoutes);
+app.use("/associate", emailRoutes);
+app.use("/admin", createAdminRoutes);
+app.use("/role", getUserRoleRoutes);
+app.use("/leads", leadsRoutes);
 
 const Port = process.env.PORT || 3000;
 
