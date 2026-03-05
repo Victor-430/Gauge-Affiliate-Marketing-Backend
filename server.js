@@ -13,26 +13,34 @@ const app = express();
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const allowedOrigins = isProduction
-  ? [process.env.CLIENT_URL]
-  : ["http://localhost:5173"]
+// const allowedOrigins = isProduction
+//   ? [process.env.CLIENT_URL]
+//   : ["http://localhost:5173"]
+
+
 
 
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("CLIENT_URL:", process.env.CLIENT_URL);
 console.log("Allowed Origins:", allowedOrigins);
 
-const corsOptions = {
+// const corsOptions = {
  
-    origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error(`CORS blocked: origin "${origin}" not allowed`));
-      }
-    },
-  }
+//     origin: (origin, callback) => {
+//       if (allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error(`CORS blocked: origin "${origin}" not allowed`));
+//       }
+//     },
+//   }
 
+const corsOptions = {
+  origin: "https://affiliate.gaugesolution.com"
+};
+
+app.use(cors(corsOptions));
+app.options("/{*path}", cors(corsOptions));
 
 app.use(cors(corsOptions));
 app.options("/{*path}", cors(corsOptions));
