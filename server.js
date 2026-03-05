@@ -36,7 +36,8 @@ console.log("Allowed Origins:", allowedOrigins);
 //   }
 
 const corsOptions = {
-  origin: "https://affiliate.gaugesolution.com"
+  origin: "https://affiliate.gaugesolution.com",
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
