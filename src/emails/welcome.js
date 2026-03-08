@@ -1,10 +1,15 @@
 import fs from "fs";
 import juice from "juice";
+import { fileURLToPath } from "url";
+import path from "path";
 
-const css = fs.readFileSync("../output.css", "utf-8");
+const __fileName = fileURLToPath(import.meta.url)
+const __dirName = path.dirname(__fileName)
+
+const css = fs.readFileSync(path.join(__dirName, "../output.css"), "utf-8");
 
 export const getWelcomeEmail = (affiliateLink, uniqueCode, associate) => {
-  const date = Date().getFullYear();
+  const date = new Date().getFullYear();
   const rawHtml = ` <!DOCTYPE html>
   <html>
   <head>
