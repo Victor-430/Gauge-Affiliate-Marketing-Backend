@@ -1,10 +1,12 @@
 {
   "dependencies": {
+    "@tailwindcss/cli": "^4.2.1",
     "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
     "firebase-admin": "^13.6.1",
     "resend": "^6.9.1",
+    "tailwindcss": "^4.2.1",
     "uuid": "^13.0.0"
   },
   "name": "gauge-affiliate-marketing-backend",
