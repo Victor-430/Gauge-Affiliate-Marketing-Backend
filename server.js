@@ -11,17 +11,14 @@ dotenv.config();
 
 const app = express();
 
-// const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "production";
 
-// const allowedOrigins = isProduction
-//   ? [process.env.CLIENT_URL]
-//   : ["http://localhost:5173"]
-
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("CLIENT_URL:", process.env.CLIENT_URL);
+const allowedOrigins = isProduction
+  ? [process.env.CLIENT_URL]
+  : ["http://localhost:5173"];
 
 const corsOptions = {
-  origin: "https://affiliate.gaugesolution.com",
+  origin: allowedOrigins,
   credentials: true,
 };
 

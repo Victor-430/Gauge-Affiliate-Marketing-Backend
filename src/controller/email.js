@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "../../server.js";
 import admin from "firebase-admin";
 import { resend } from "../config/resend.js";
-import config from "../config/env.js"
+import config from "../config/env.js";
 
 const sendWelcomeEmail = async (req, res, next) => {
   const generateUniqueCode = () => {
@@ -13,11 +13,11 @@ const sendWelcomeEmail = async (req, res, next) => {
 
   try {
     const { idToken } = req.body;
-    console.log(idToken)
+    console.log(idToken);
 
     if (!idToken) {
       const error = new Error("ID token is required");
-      console.log("token required")
+      console.log("token required");
       error.status = 400;
       throw error;
     }
@@ -56,7 +56,7 @@ const sendWelcomeEmail = async (req, res, next) => {
 
     // Generate unique code and link
     const uniqueCode = generateUniqueCode();
-    const affiliateLink = `${config.affiliateBaseUrl}/leads?ref=${uniqueCode}`
+    const affiliateLink = `${config.affiliateBaseUrl}/leads?ref=${uniqueCode}`;
 
     // Update associate document
     await db.collection("associates").doc(userId).update({
@@ -67,10 +67,12 @@ const sendWelcomeEmail = async (req, res, next) => {
       activatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
+    const date = new Date().getFullYear();
+
     const { data, error } = await resend.emails.send({
       from: "Gauge <delivered@resend.dev>",
       to: ["victor@gaugesolution.com"],
-      // from: "Gauge Solutions <noreply@gaugesolution.com>",
+      // from: "Gauge Solution <noreply@gaugesolution.com>",
       // to: [associate.email],
       subject: "Welcome to Gauge Affiliate Program",
       html: `
@@ -93,21 +95,25 @@ const sendWelcomeEmail = async (req, res, next) => {
               
               <p class="mb-6">Congratulations. Your email has been verified and your account is now <strong class="text-green-600">ACTIVE</strong>.</p>
               
-              <div class="bg-white border-2 border-dashed p-6 my-6 rounded-lg text-center">
+              <div class="bg-black border-2 border-dashed p-6 my-6 rounded-lg text-center">
                 <p class="text-sm text-gray-500 mb-3 uppercase tracking-wide">Your Unique Referral Code is:</p>
                 <span class="text-2xl font-bold text-white tracking-wider">${uniqueCode}</span>
               </div>
               
               <div class=" p-4 my-6 rounded-lg break-all">
                 <p class="mb-2 m-0"><strong> Your Affiliate Link:</strong></p>
-                <a href="${affiliateLink}" class=" underline text-sm break-all">${affiliateLink}</a>
+                <a href="${affiliateLink}" class=" underline text-sm break-all text-indigo-600">${affiliateLink}</a>
               </div>
       
               <hr class="border-0 border-t border-gray-200 my-8">
+              <div class="text-sm text-gray-500 space-y-2 mb-2">
               
-              <p class="text-sm text-gray-500 m-0">
+              <p>
                 Need help? Contact us at <a href="mailto:support@gaugesolution.com" class="text-indigo-600">support@gaugesolution.com</a>
               </p>
+              <p class="text-center">&copy; ${date} All rights reserved</p>
+              
+              </div>
             </div>
           </div>
         </body>
@@ -119,7 +125,7 @@ const sendWelcomeEmail = async (req, res, next) => {
       console.error("Resend error:", error);
       const err = new Error("Failed to send welcome email");
       err.status = 500;
-      throw err
+      throw err;
     }
 
     console.log(
