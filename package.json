@@ -5,6 +5,7 @@
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
     "firebase-admin": "^13.6.1",
+    "juice": "^11.1.1",
     "resend": "^6.9.1",
     "tailwindcss": "^4.2.1",
     "uuid": "^13.0.0"
@@ -16,6 +17,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch ./server.js",
+    "build:email": "tailwindcss -i ./input.css -o ./output.css --content './emails/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
